@@ -36,16 +36,16 @@ class Home extends StatelessWidget {
                   Positioned(
                     right: 0,
                     bottom: 0,
-                    left: 0,
-                    child: Container(
-                      height: 50,
+                      left: 0,
+                      child: Container(
+                        height: 50,
                       alignment: Alignment.center,
                       color: Color.fromRGBO(0, 0, 0, 0.7),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(name),
-                          Text('26 ans')
+                          Text('25 ans')
                         ],
                       ),
                     ),
@@ -60,9 +60,8 @@ class Home extends StatelessWidget {
           right: 0,
           left: 0,
           child: AppBar(
-            title: Text('test'),
+            title: Text('Home'),
             centerTitle: true,
-            backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
           ),
         ),
       ],

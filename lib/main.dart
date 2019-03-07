@@ -12,9 +12,10 @@ class MyApp extends StatelessWidget {
       title: 'Stages',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark,  
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.red,
+        brightness: Brightness.dark,
+        appBarTheme: AppBarTheme(
+          color: Colors.red.withOpacity(.9),
+        ),
         accentColor: Colors.blue[600]
       ),  
         home: TabNavigation(),

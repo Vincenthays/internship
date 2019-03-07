@@ -13,7 +13,7 @@ class InternshipProfile extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Text('Offer detail', style: Theme.of(context).textTheme.display2),
+        child: Text('Offer detail', style: Theme.of(context).textTheme.display1),
       ),
     );
   }

@@ -76,7 +76,6 @@ class MyInternshipOffer extends StatelessWidget {
           child: AppBar(
             title: Text('Mes offres de stages'),
             centerTitle: true,
-            backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
           ),
         ),
       ],

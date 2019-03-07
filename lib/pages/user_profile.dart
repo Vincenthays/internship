@@ -16,7 +16,6 @@ class UserProfile extends StatelessWidget {
             centerTitle: true,
             pinned: true,
             elevation: 0,
-            backgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
                 tag: _name,
