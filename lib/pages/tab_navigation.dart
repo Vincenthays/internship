@@ -29,7 +29,7 @@ class _TabNavigationState extends State<TabNavigation> {
         onTap: (int idx) => setState(() => _currentIndex = idx),
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_add),
             title: Text('Candidature'),
           ),
           BottomNavigationBarItem(
@@ -37,7 +37,7 @@ class _TabNavigationState extends State<TabNavigation> {
             title: Text('Test'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_add),
+            icon: Icon(Icons.folder_shared),
             title: Text('Mes propositions'),
           ),
           BottomNavigationBarItem(

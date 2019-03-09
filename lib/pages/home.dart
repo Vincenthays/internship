@@ -23,11 +23,7 @@ class Home extends StatelessWidget {
               },
               child: Stack(
                 children: <Widget>[
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
+                  Positioned.fill(
                     child: Hero(  
                       tag: name,
                       child: Image.asset('assets/user.png', fit: BoxFit.cover,),
