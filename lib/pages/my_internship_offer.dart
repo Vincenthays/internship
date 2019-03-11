@@ -12,7 +12,8 @@ class MyInternshipOffer extends StatelessWidget {
           padding: EdgeInsets.only(top: 80),
           itemCount: internships.length,
           itemBuilder: (context, index) {
-            String name = internships[index];
+            final name = internships[index];
+            String lastName;
             return Dismissible(
               key: Key(index.toString()),
               background: Container(
@@ -66,6 +67,23 @@ class MyInternshipOffer extends StatelessWidget {
                   context, MaterialPageRoute(builder: (context) => InternshipProfile(name))
                 ),
               ),
+              onDismissed: (direction) {
+                if (direction ==DismissDirection.startToEnd) {
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Row(
+                      children: <Widget>[
+                        Text(name),
+                        FlatButton(
+                          child: Text('Annuler'),
+                          onPressed: () => Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text('Annulé'),
+                          ))
+                        )
+                      ],
+                    )
+                  ));
+                }
+              },
             );
           },
         ),

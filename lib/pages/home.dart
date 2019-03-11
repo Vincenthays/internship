@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           children: List.generate(_names.length, (index) {
-            String name = _names[index];
+            final String name = _names[index];
             return GestureDetector(
               onTap: () {
                 Navigator.push(
