@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seb/components/MyAppBarBackground.dart';
 
 import './internship_profile.dart';
 
