@@ -15,7 +15,6 @@ class UserProfile extends StatelessWidget {
             title: Text(_name),
             centerTitle: true,
             pinned: true,
-            elevation: 0,
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
                 tag: _name,

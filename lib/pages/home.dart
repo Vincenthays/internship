@@ -3,50 +3,61 @@ import 'package:flutter/material.dart';
 import './user_profile.dart';
 
 class Home extends StatelessWidget {
-  final List<String> _names = <String>['Vincent', 'Sébastien', 'Lorène', 'Lola', 'Yasmine', 'Tisto', 'Marie', 'Camille'];
+  final List<String> _names = <String>[
+    'Vincent',
+    'Sébastien',
+    'Lorène',
+    'Lola',
+    'Yasmine',
+    'Tisto',
+    'Marie',
+    'Camille'
+  ];
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         GridView.count(
-          padding: EdgeInsets.only(top: 95, bottom: 15),
+          padding: EdgeInsets.only(top: 95, bottom: 15, right: 10, left: 10),
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
           children: List.generate(_names.length, (index) {
             final String name = _names[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => UserProfile(name))
-                );
-              },
-              child: Stack(
-                children: <Widget>[
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfile(name)));
+                },
+                child: Stack(children: <Widget>[
                   Positioned.fill(
-                    child: Hero(  
+                    child: Hero(
                       tag: name,
-                      child: Image.asset('assets/user.png', fit: BoxFit.cover,),
+                      child: Image.asset(
+                        'assets/user.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Positioned(
                     right: 0,
                     bottom: 0,
-                      left: 0,
-                      child: Container(
-                        height: 50,
+                    left: 0,
+                    child: Container(
+                      height: 50,
                       alignment: Alignment.center,
                       color: Color.fromRGBO(0, 0, 0, 0.7),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(name),
-                          Text('25 ans')
-                        ],
+                        children: <Widget>[Text(name), Text('25 ans')],
                       ),
                     ),
                   ),
-                ]
+                ]),
               ),
             );
           }),
