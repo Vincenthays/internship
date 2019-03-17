@@ -132,7 +132,8 @@ class ProfileCard extends StatelessWidget {
             child: Transform.rotate(
               angle: -.4,
               child: Container(
-                child: Text('POSTULER',
+                child: Text(
+                    'POSTULER',
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
