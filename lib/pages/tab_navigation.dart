@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './home.dart';
-import './test.dart';
 import './account.dart';
+import './card_swipe.dart';
+import './home.dart';
 import './my_internship_offer.dart';
+import './test.dart';
 
 class TabNavigation extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class _TabNavigationState extends State<TabNavigation> {
 
   List<Widget> _screens = <Widget>[
     Home(),
+    CardSwipe(),
     Test(),
     MyInternshipOffer(),
     Account(),
@@ -31,6 +33,10 @@ class _TabNavigationState extends State<TabNavigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person_add),
             title: Text('Candidature'),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              title: Text('Card')
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bug_report),
