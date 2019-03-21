@@ -48,26 +48,27 @@ class _Buttons extends StatelessWidget {
           _MyButton.small(
             icon: Icons.refresh,
             color: Colors.orange,
-            onTap: () {},
+            onPressed: () {},
           ),
           _MyButton.large(
             icon: Icons.clear,
             color: Colors.red,
-            onTap: () {},
+            onPressed: () {},
           ),
           _MyButton.large(
             icon: Icons.star,
             color: Colors.blue,
-            onTap: () {},
+            onPressed: () {},
           ),
           _MyButton.large(
             icon: Icons.favorite,
             color: Colors.green,
+              onPressed: () {}
           ),
           _MyButton.small(
             icon: Icons.lock,
             color: Colors.purple,
-            onTap: () {},
+            onPressed: () {},
           ),
         ],
       ),
@@ -206,7 +207,7 @@ class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
   double _positionY = 0;
   double _rotate = 0;
   double _scale = 1;
-  Animation _animation;
+  Animation<double> _animation;
   AnimationController _animationController;
 
   @override
@@ -231,7 +232,7 @@ class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
         ..rotateZ(_rotate)
         ..translate(_positionX, _positionY)
         ..scale(_scale),
-      alignment: Alignment.bottomCenter,
+      alignment: Alignment.center,
       child: GestureDetector(
         child: widget.child,
         onPanStart: _onPanStart,
@@ -245,7 +246,7 @@ class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
 
   void _updateCardTransformation(double x) {
     setState(() {
-      // _positionY = x.abs()/3;
+      _positionY = -.15 * x.abs();
       _positionX = x;
       _rotate = x / 1000;
     });
@@ -258,7 +259,7 @@ class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
   void _onPanEnd(DragEndDetails ded) {
     setState(() => _scale = 1);
     _animationController.reset();
-    final double end = _positionX.abs() < 100 ? 0 : _positionY > 0 ? 500 : -500;
+    final double end = _positionX.abs() < 100 ? 0 : _positionY > 0 ? 600 : -600;
     _animation =
         Tween(begin: _positionX, end: end).animate(_animationController);
     _animationController.addListener(
@@ -270,27 +271,26 @@ class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
 class _MyButton extends StatelessWidget {
   final IconData icon;
   final double size;
-  final VoidCallback onTap;
+  final VoidCallback onPressed;
   final Color color;
 
-  _MyButton.small({this.icon, this.onTap, this.color}) : size = 20;
+  _MyButton.small({this.icon, this.onPressed, this.color}) : size = 20;
 
-  _MyButton.large({this.icon, this.onTap, this.color}) : size = 30;
+  _MyButton.large({this.icon, this.onPressed, this.color}) : size = 30;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        padding: EdgeInsets.all(15),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50), color: Colors.black),
-        child: Icon(
-          icon,
-          size: size,
-          color: color,
-        ),
+    return RawMaterialButton(
+      constraints: BoxConstraints.tightFor(),
+      fillColor: Colors.black,
+      padding: EdgeInsets.all(15),
+      shape: CircleBorder(),
+      child: Icon(
+        icon,
+        size: size,
+        color: color,
       ),
-      onTap: onTap,
+      onPressed: onPressed,
     );
   }
 }

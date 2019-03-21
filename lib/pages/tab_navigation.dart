@@ -14,7 +14,7 @@ class TabNavigation extends StatefulWidget {
 class _TabNavigationState extends State<TabNavigation> {
   int _currentIndex = 0;
 
-  List<Widget> _screens = <Widget>[
+  final _screens = <Widget>[
     Home(),
     CardSwipe(),
     Test(),
