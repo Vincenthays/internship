@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         appBarTheme: AppBarTheme(
-          color: Colors.red.withOpacity(.9),
+          color: Colors.black.withOpacity(.7),
         ),
-        accentColor: Colors.blue[600]
-      ),  
-        home: TabNavigation(),
-      );
-    }
+        accentColor: Colors.redAccent[100],
+      ),
+      home: TabNavigation(),
+    );
   }
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 import './user_profile.dart';
 
@@ -29,9 +30,9 @@ class Home extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UserProfile(name)));
+                    context,
+                    MaterialPageRoute(builder: (context) => UserProfile(name)),
+                  );
                 },
                 child: Stack(children: <Widget>[
                   Positioned.fill(
@@ -47,13 +48,16 @@ class Home extends StatelessWidget {
                     right: 0,
                     bottom: 0,
                     left: 0,
+                    height: 50,
                     child: Container(
-                      height: 50,
                       alignment: Alignment.center,
-                      color: Color.fromRGBO(0, 0, 0, 0.7),
+                      color: Theme.of(context).accentColor.withOpacity(.9),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[Text(name), Text('25 ans')],
+                        children: <Widget>[
+                          Text(name),
+                          Text('25 ans'),
+                        ],
                       ),
                     ),
                   ),

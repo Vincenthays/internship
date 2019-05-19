@@ -35,8 +35,8 @@ class _TabNavigationState extends State<TabNavigation> {
             title: Text('Candidature'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              title: Text('Card')
+            icon: Icon(Icons.favorite),
+            title: Text('Card'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bug_report),
@@ -44,7 +44,7 @@ class _TabNavigationState extends State<TabNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.folder_shared),
-            title: Text('Mes propositions'),
+            title: Text('Propositions'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
