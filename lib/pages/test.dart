@@ -133,23 +133,20 @@ class _CirculStackState extends State<CirculStack>
   Widget build(BuildContext context) {
     return Expanded(
       child: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
-          Positioned.fill(
-            child: CustomPaint(
-              painter: CircleIndicator(
-                _animation.value,
-                widget._color,
-              ),
+          CustomPaint(
+            painter: CircleIndicator(
+              _animation.value,
+              widget._color,
             ),
           ),
-          Positioned.fill(
-            child: Center(
-              child: Text(
-                widget._title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+          Center(
+            child: Text(
+              widget._title,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
