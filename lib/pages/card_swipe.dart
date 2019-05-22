@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class CardSwipe extends StatelessWidget {
   @override
@@ -15,6 +14,9 @@ class CardSwipe extends StatelessWidget {
             child: AppBar(
               title: Text('Card'),
               centerTitle: true,
+              actions: <Widget>[
+                IconButton(icon: Icon(Icons.settings), onPressed: () {}),
+              ],
             ),
           ),
           Positioned(bottom: 0, right: 0, left: 0, child: _Buttons()),
@@ -43,13 +45,8 @@ class _Buttons extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          _MyButton.small(
-            icon: Icons.refresh,
-            color: Colors.orange,
-            onPressed: () {},
-          ),
           _MyButton.large(
             icon: Icons.clear,
             color: Colors.red,
@@ -63,11 +60,6 @@ class _Buttons extends StatelessWidget {
           _MyButton.large(
             icon: Icons.favorite,
             color: Colors.green,
-              onPressed: () {}
-          ),
-          _MyButton.small(
-            icon: Icons.lock,
-            color: Colors.purple,
             onPressed: () {},
           ),
         ],
@@ -96,53 +88,15 @@ class ProfileCard extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: Row(
             children: <Widget>[
-              Expanded(
+              for (var i = 0; i < 4; i += 1)
+                Expanded(
                   child: Container(
-                height: 5,
-                color: Colors.white.withOpacity(.8),
-                margin: EdgeInsets.all(3),
-              )),
-              Expanded(
-                  child: Container(
-                height: 5,
-                color: Colors.grey.withOpacity(.5),
-                margin: EdgeInsets.all(3),
-              )),
-              Expanded(
-                  child: Container(
-                height: 5,
-                color: Colors.grey.withOpacity(.5),
-                margin: EdgeInsets.all(3),
-              )),
-              Expanded(
-                  child: Container(
-                height: 5,
-                color: Colors.grey.withOpacity(.5),
-                margin: EdgeInsets.all(3),
-              )),
+                    height: 5,
+                    color: Colors.white.withOpacity(i == 0 ? .8 : .3),
+                    margin: EdgeInsets.all(3),
+                  ),
+                ),
             ],
-          ),
-        ),
-        Positioned(
-          top: 60,
-          left: 10,
-          child: Transform.rotate(
-            angle: -.4,
-            child: Container(
-              child: Text(
-                'POSTULER',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green.withOpacity(.5)),
-              ),
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              decoration: BoxDecoration(
-                border:
-                    Border.all(color: Colors.green.withOpacity(.5), width: 7),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
           ),
         ),
         Positioned(
@@ -171,14 +125,18 @@ class ProfileCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'Chef de projet',
-                        style: Theme.of(context).textTheme.title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .title
+                            .copyWith(color: Colors.white),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Text(
                         'Description',
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context)
+                            .textTheme
+                            .subtitle
+                            .copyWith(color: Colors.white),
                       ),
                     ],
                   ),
@@ -203,26 +161,31 @@ class _Drag extends StatefulWidget {
 }
 
 class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
-  double _positionX = 0;
-  double _positionY = 0;
+  AnimationController _controller;
+  Animation _animation;
+  double _x = 0;
+  double _y = 0;
   double _rotate = 0;
   double _scale = 1;
-  Animation<double> _animation;
-  AnimationController _animationController;
 
   @override
-  void initState() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 300),
-    );
+  initState() {
     super.initState();
+    _controller = AnimationController(
+      duration: Duration(milliseconds: 600),
+      vsync: this,
+    );
+
+    _animation = Tween(
+      begin: .0,
+      end: 1.0,
+    ).animate(_controller);
   }
 
   @override
-  void dispose() {
-    _animationController.dispose();
+  dispose() {
     super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -230,7 +193,7 @@ class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
     return Transform(
       transform: Matrix4.identity()
         ..rotateZ(_rotate)
-        ..translate(_positionX, _positionY)
+        ..translate(_x, _y)
         ..scale(_scale),
       alignment: Alignment.center,
       child: GestureDetector(
@@ -241,49 +204,62 @@ class _DragState extends State<_Drag> with SingleTickerProviderStateMixin {
       ),
     );
   }
-
-  void _onPanStart(DragStartDetails dsd) => setState(() => _scale = 1.03);
-
-  void _updateCardTransformation(double x) {
+  
+  void _onPanStart(DragStartDetails dsd) {
     setState(() {
-      _positionY = -.15 * x.abs();
-      _positionX = x;
-      _rotate = x / 1000;
+      _scale = 1.03;
     });
   }
 
   void _onPanUpdate(DragUpdateDetails dud) {
-    _updateCardTransformation(_positionX + dud.delta.dx);
+    setState(() {
+      _x += dud.delta.dx;
+      _y += dud.delta.dy;
+      _rotate = _x / 1000;
+    });
   }
 
   void _onPanEnd(DragEndDetails ded) {
-    setState(() => _scale = 1);
-    _animationController.reset();
-    final double end = _positionX.abs() < 100 ? 0 : _positionY > 0 ? 600 : -600;
-    _animation =
-        Tween(begin: _positionX, end: end).animate(_animationController);
-    _animationController.addListener(
-        () => _updateCardTransformation(_animation.value.toDouble()));
-    _animationController.forward();
+    print('end');
+    Function _fx = (double v) => (1 - v) * _x;
+    Function _fy = (double v) => (1 - v) * _y;
+
+    Offset velocity = ded.velocity.pixelsPerSecond;
+
+    if (velocity.dx != 0 && _x.abs() > 100) {
+      _fx = (double v) => 100 * cos(velocity.direction) * v + _x;
+      _fy = (double v) => 100 * sin(velocity.direction) * v + _y;
+    }
+    _animation.addListener(() {
+      setState(() {
+        _x = _fx(_animation.value);
+        _y = _fy(_animation.value);
+        _rotate = _x / 1000;
+        _scale = 1;
+      });
+    });
+    _animation.addStatusListener((status) {
+      print(status);
+    });
+    _controller.forward(from: 0).orCancel;
   }
 }
 
 class _MyButton extends StatelessWidget {
+  _MyButton.small({this.icon, this.onPressed, this.color}) : size = 20;
+  _MyButton.large({this.icon, this.onPressed, this.color}) : size = 30;
+
   final IconData icon;
   final double size;
   final VoidCallback onPressed;
   final Color color;
-
-  _MyButton.small({this.icon, this.onPressed, this.color}) : size = 20;
-
-  _MyButton.large({this.icon, this.onPressed, this.color}) : size = 30;
 
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
       constraints: BoxConstraints.tightFor(),
       fillColor: Colors.black,
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
       shape: CircleBorder(),
       child: Icon(
         icon,

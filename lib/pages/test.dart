@@ -111,7 +111,7 @@ class _CirculStackState extends State<CirculStack>
     _controller = AnimationController(
         vsync: this, duration: Duration(milliseconds: 1500));
     _animation = Tween(
-      begin: 0,
+      begin: 0.01,
       end: widget._completePercent,
     ).animate(
       CurvedAnimation(
@@ -161,6 +161,8 @@ class CircleIndicator extends CustomPainter {
   Color _color;
 
   CircleIndicator(this._completePercent, this._color);
+
+  double get completePercent => _completePercent;
 
   @override
   void paint(Canvas canvas, Size size) {
