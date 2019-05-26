@@ -17,7 +17,7 @@ class Test extends StatelessWidget {
                 centerTitle: true,
                 title: Text('Chef de projet'),
                 background: Image.asset(
-                  'assets/user.png',
+                  'images/user.png',
                   fit: BoxFit.cover,
                 ),
               ),

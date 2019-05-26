@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-import './user_profile.dart';
+import 'package:seb/pages/user_profile.dart';
 
 class Home extends StatelessWidget {
   final List<String> _names = <String>[
@@ -39,7 +39,7 @@ class Home extends StatelessWidget {
                     child: Hero(
                       tag: name,
                       child: Image.asset(
-                        'assets/user.png',
+                        'images/user.png',
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -19,7 +19,7 @@ class UserProfile extends StatelessWidget {
             background: Hero(
               tag: this._name,
               child: Image.asset(
-                'assets/user.png',
+                'images/user.png',
                 fit: BoxFit.cover,
               ),
             ),

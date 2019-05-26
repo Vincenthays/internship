@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './account.dart';
-import './card_swipe.dart';
-import './home.dart';
-import './my_internship_offer.dart';
-import './test.dart';
+import 'package:seb/pages/account.dart';
+import 'package:seb/pages/card_swipe.dart';
+import 'package:seb/pages/home.dart';
+import 'package:seb/pages/my_internship_offer.dart';
+import 'package:seb/pages/test.dart';
 
 class TabNavigation extends StatefulWidget {
   @override
