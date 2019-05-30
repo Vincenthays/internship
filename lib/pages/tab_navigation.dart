@@ -15,8 +15,8 @@ class _TabNavigationState extends State<TabNavigation> {
   int _currentIndex = 0;
 
   final _screens = <Widget>[
-    Home(),
     CardSwipe(),
+    Home(),
     Test(),
     MyInternshipOffer(),
     Account(),
@@ -31,12 +31,12 @@ class _TabNavigationState extends State<TabNavigation> {
         onTap: (int idx) => setState(() => _currentIndex = idx),
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_add),
-            title: Text('Candidature'),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             title: Text('Card'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_add),
+            title: Text('Candidature'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bug_report),
