@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:provider/provider.dart';
-import 'package:seb/bloc/card_bloc.dart';
-
 import './pages/tab_navigation.dart';
 
 void main() {
