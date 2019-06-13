@@ -71,7 +71,14 @@ class _CardSwipe extends StatelessWidget {
   }
 }
 
-class _ModalBottomSheet extends StatelessWidget {
+  class _ModalBottomSheet extends StatefulWidget {
+  @override
+  _ModalBottomSheetState createState() => _ModalBottomSheetState();
+}
+
+class _ModalBottomSheetState extends State<_ModalBottomSheet> {
+  double _sliderValue = 3;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -82,6 +89,18 @@ class _ModalBottomSheet extends StatelessWidget {
             'Filtres',
             style: Theme.of(context).textTheme.display1,
           ),
+          for (int i = 0; i < 3; i++)
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: Slider(
+                min: 0,
+                max: 10,
+                value: _sliderValue,
+                onChanged: (value) => setState(() => _sliderValue = value),
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Theme.of(context).backgroundColor,
+              ),
+            ),
         ],
       ),
     );
@@ -216,10 +235,10 @@ class _Drag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CardBloc cardBloc = Provider.of<CardBloc>(context);
+    final cardBloc = Provider.of<CardBloc>(context);
     return StreamBuilder(
         initialData: NewCardPosition(),
-        stream: Provider.of<CardBloc>(context).newCardPositon,
+        stream: cardBloc.newCardPositon,
         builder: (context, snapshot) {
           NewCardPosition cep = snapshot.data;
           return AnimatedContainer(
